@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 
 export const Div = styled.section`
+    cursor: pointer;
+
     > img {
         width: 100%;
         height: 100%;

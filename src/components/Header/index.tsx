@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 import { Lup } from 'components/Header/Lup'
 
 import { 
@@ -17,9 +17,12 @@ export const Header: React.FC = () => {
     return (
         <HeaderContainer>
             <NavContainer>
-                <Logo>
-                    Manga Sensei
-                </Logo>
+
+                <Link href={"/"}>
+                    <Logo>
+                        Manga Sensei
+                    </Logo>
+                </Link>
 
                 {/* Search Bar */}
                 <InputContainer>
