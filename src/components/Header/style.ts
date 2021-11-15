@@ -26,11 +26,13 @@ export const NavContainer = styled.nav`
 ` 
 
 export const Logo = styled.div`
-font-size: 2rem;
-font-weight: bold;
-color: var(--red);
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--red);
 
-text-align: center;
+    text-align: center;
+
+    cursor: pointer;
 
 `
 

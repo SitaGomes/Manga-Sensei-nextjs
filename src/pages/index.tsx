@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //! Next
 import HeadTag from 'next/head';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 //! Axios
 import proxy from "services/proxy"

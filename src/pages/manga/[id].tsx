@@ -36,19 +36,7 @@ interface MangaData {
             attributes: {
                 fileName: string
             }
-        },
-        {
-            type: string,
-            attributes: {
-                fileName: string
-            }
-        },
-        {
-            type: string,
-            attributes: {
-                fileName: string
-            }
-        },
+        }
     ]
 }
 
@@ -56,6 +44,7 @@ interface MangaData {
 export default function SingleManga () {
 
     const [mangaData, setMangaData] = useState<MangaData[]>([])
+    const [imageUrl, setImageUrl] = useState("")
     
     const router = useRouter()
     const {id: mangaID} = router.query
@@ -88,27 +77,54 @@ export default function SingleManga () {
 
     }, [mangaID])
 
+    useEffect(() => {
+
+        function getImageUrl() {
+            mangaData.map((manga => {
+                manga.relationships.map(child => {
+                    
+                    if (child.type === "cover_art") {
+    
+                        setImageUrl(child.attributes.fileName)
+                    }
+    
+                })
+            }))
+        }
+
+        getImageUrl()
+
+    }, [mangaData])
+
+
 
     return (
         <main>
-            {mangaData.map((manga, index: number) => (
-                <section key={index}>
-                    <HeadTag>
-                        <title>{manga.attributes.title.en}</title>
-                    </HeadTag>
+            {imageUrl.trim() === "" ? (<h1>Loading</h1>) : (
+                <>
+                    {mangaData.map((manga, index: number) => (
+                
+                        <section key={index}>
+                            <HeadTag>
+                                <title>{manga.attributes.title.en}</title>
+                            </HeadTag>
 
-                    <MangaInfo 
-                        imageURl={manga.relationships[2]?.attributes?.fileName !== undefined ? manga.relationships[2].attributes.fileName : manga.relationships[manga.relationships.length - 1].attributes.fileName}
-                        title={manga.attributes.title.en}
-                        mangaID={manga.id}
-                        description={manga.attributes.description.en}
-                        yearOfRelease={manga.attributes.year}
-                        status={manga.attributes.status}
-                        lastChapter={manga.attributes.lastChapter}
-                        lastVolume={manga.attributes.lastVolume}
-                    />
-                </section>
-              ))}
+                            <MangaInfo 
+                                //imageURl={manga.relationships[2]?.attributes?.fileName !== undefined ? manga.relationships[2].attributes.fileName : manga.relationships[manga.relationships.length - 1].attributes.fileName}
+                                imageURl={imageUrl}
+                                title={manga.attributes.title.en}
+                                mangaID={manga.id}
+                                description={manga.attributes.description.en}
+                                yearOfRelease={manga.attributes.year}
+                                status={manga.attributes.status}
+                                lastChapter={manga.attributes.lastChapter}
+                                lastVolume={manga.attributes.lastVolume}
+                            />
+                        </section>
+                    ))}
+                </>
+            )}
+            
         </main>
     )
 }
