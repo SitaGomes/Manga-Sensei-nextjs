@@ -5,6 +5,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
 
+
     > img {
         object-fit: cover;
     }
@@ -23,6 +24,7 @@ export const Container = styled.div`
         }
 
         p {
+            width: 100%;
             span{
                 font-weight: 500;
                 font-size: 1.3rem;
