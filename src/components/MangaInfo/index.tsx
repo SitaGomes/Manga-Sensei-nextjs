@@ -17,13 +17,15 @@ export const MangaInfo: React.FC<MangaInfoProps> = ({imageURl, mangaID, title, d
 
     const mangaBannerArt = `https://uploads.mangadex.org/covers/${mangaID}/${imageURl}`
 
-
     return (
         <Container>
             <img src={mangaBannerArt} alt={title} />
             
             <div>
                 <h1>{title}</h1>
+
+
+
                 <p><span>Status: </span> {status}</p>
                 <p><span>Year of release: </span> {yearOfRelease ? yearOfRelease : "unknown"}</p>
                 <p><span>Last volume </span> {lastVolume ?lastVolume : "unknown"}</p>
