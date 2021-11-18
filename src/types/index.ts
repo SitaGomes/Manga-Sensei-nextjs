@@ -78,7 +78,8 @@ export interface BannerArt {
     },
     relationships: [
         {
-            id: string
+            id: string,
+            type: string
         }
     ]
 }

@@ -29,6 +29,8 @@ export const Container = styled.div`
                 font-weight: 500;
                 font-size: 1.3rem;
             }
+
+            
             text-align: left;
         }
     }

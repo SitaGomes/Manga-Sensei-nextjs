@@ -73,7 +73,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
                 > 
                   <Banner 
                       fileName={banner.attributes.fileName}
-                      mangaId={banner.relationships[0].id}
+                      mangaId={banner.relationships.find(manga => manga.type === 'manga').id}
                     />
                 </SwiperSlide>
               ))}
@@ -96,7 +96,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
                   key={index}
                 > 
                   <HomeSlider 
-                    fileName={manga.relationships[2].attributes.fileName ? manga.relationships[2].attributes.fileName : manga.relationships[manga.relationships.length - 1].attributes.fileName}
+                    fileName={manga.relationships.find(manga => manga.type === "cover_art").attributes.fileName}
                     id={manga.id}
                     tittle={manga.attributes.title}
                   />
@@ -126,7 +126,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
                   key={index}
                 > 
                   <HomeSlider 
-                    fileName={manga.relationships[3]?.attributes?.fileName ? manga.relationships[3].attributes.fileName : manga.relationships[manga.relationships.length - 1]?.attributes?.fileName}
+                    fileName={manga.relationships.find(manga => manga.type === "cover_art").attributes.fileName}
                     id={manga.id}
                     tittle={manga.attributes.title}
                   />
