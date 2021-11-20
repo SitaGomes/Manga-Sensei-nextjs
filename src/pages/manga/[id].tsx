@@ -8,7 +8,7 @@ import HeadTag from 'next/head';
 import { MangaInfo } from "components/MangaInfo"
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
-interface MangaData {
+type MangaData = {
 
     id: string,
     attributes: {
@@ -41,43 +41,13 @@ interface MangaData {
     ]
 }
 
+interface SingleMangaProps {
+    mangaData: MangaData[]
+}
 
-export default function SingleManga () {
+export default function SingleManga ({mangaData}: SingleMangaProps) {
 
-    const [mangaData, setMangaData] = useState<MangaData[]>([])
-    const [mangaNotFound, setMangaNotFound] = useState(false)
     const [loading, setLoading] = useState(true)
-    
-    const router = useRouter()
-    const {id: mangaID} = router.query
-    
-
-    useEffect(() => {
-        if (mangaID === undefined) {
-            return
-        }
-
-        const getManga = async () => {
-            try {
-
-                const response = await proxy("single", {
-                    method: "POST",
-                    data: {
-                        "mangaID": mangaID
-                    }
-                })
-    
-                setMangaData(response.data as MangaData[])
-
-            } catch (err) {
-                return
-            }
-            
-        } 
-
-        getManga()
-
-    }, [mangaID])
 
     useEffect(() => {
 
@@ -92,11 +62,7 @@ export default function SingleManga () {
     return (
         <main>
             {loading   
-                ? (<>{
-                    mangaNotFound 
-                        ? (<h1>Manga not Found</h1>)
-                        : (<h1>Loading</h1>)
-                }</>)
+                ? (<h1>Loading</h1>)
                 : (<>
                         {mangaData.map((manga, index: number) => (
                     
