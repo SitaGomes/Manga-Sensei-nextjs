@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //! Next
 import HeadTag from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 
 //! Axios
 import proxy from "services/proxy"
@@ -145,7 +145,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
 }
 
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
   const bannerArt = await proxy.get("cover")
 
@@ -158,7 +158,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
       bannerArtData: bannerArt.data,
       popularMangaData: popularManga.data,
       popularWebtoonData: popularWebToons.data,
-    }
+    },
+    revalidate: 60 * 60 * 24 // 1 day
   }
 
 }

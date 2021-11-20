@@ -26,11 +26,11 @@ export const MangaInfo: React.FC<MangaInfoProps> = ({imageURl, mangaID, title, d
 
 
 
-                <p><span>Status: </span> {status}</p>
-                <p><span>Year of release: </span> {yearOfRelease ? yearOfRelease : "unknown"}</p>
-                <p><span>Last volume </span> {lastVolume ?lastVolume : "unknown"}</p>
-                <p><span>Last chapter: </span> {lastChapter ? lastChapter : "unknown"}</p>
-                <p><span>Description:</span> {description.split("\n")[0]}</p>
+                <p>Status:  <span className={status}>{status}</span></p>
+                <p>Year of release:  <span>{yearOfRelease ? yearOfRelease : "unknown"}</span></p>
+                <p>Last volume  <span>{lastVolume ?lastVolume : "unknown"}</span></p>
+                <p>Last chapter:  <span>{lastChapter ? lastChapter : "unknown"}</span></p>
+                <p>Description: <span>{description?.split("\n")[0]}</span></p>
             </div>
 
         </Container>

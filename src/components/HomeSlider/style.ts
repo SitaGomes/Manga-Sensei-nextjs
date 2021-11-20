@@ -24,7 +24,7 @@ export const MangaTittle = styled.div`
     
     background-color: var(--background-color);
     border-radius: 5px;
-    color: var(--red);
+    color: var(--red-500);
     
     > div {
         text-align: center;

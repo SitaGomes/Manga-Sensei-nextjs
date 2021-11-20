@@ -10,18 +10,26 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     :root{
-        --red: #F35F5F;
-        --yellow: #FFC01D;
-        --light-blue: #D3F0F8;
+        //! Colors
+        --green-500: green;
 
-        --grey1: #535353;
-        --grey2: #A5A5A5;
+        --red-500: #F35F5F;
+
+        --yellow-500: #FFC01D;
+        
+        --blue-200: #D3F0F8;
+        --blue-500: blue;
+
+        --grey-700: #414141;
+        --grey-200: #535353;
 
         --background-color: #F5F5F5; //? Change Later
+        //* Ligth = F5F5F5
+        //* Dark = 242424
         
-        --text-color: var(--grey2);
-        --tittle-color: #161616; //? Change later
+        --text-color: var(--grey-200);
 
+        //! Variables
         --border-radius: 1.25rem;
 
         --max-width: 62.5rem;
@@ -45,6 +53,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        background-color: var(--background-color);
         -webkit-font-smoothing: antialiased; //Fontes mais nítidas
     }
 
@@ -58,18 +67,4 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
     }
 
-    .slide {
-        opacity: 0;
-        transition-duration: 1s ease;
-    }
-
-    .slide.active {
-    opacity: 1;
-    transition-duration: 1s;
-    transform: scale(1.08);
-    }
-
-    .pd-2 {
-        padding: 20px;
-    }
 `

@@ -6,6 +6,7 @@ import proxy from "services/proxy"
 import HeadTag from 'next/head';
 
 import { MangaInfo } from "components/MangaInfo"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
 interface MangaData {
 
@@ -101,7 +102,7 @@ export default function SingleManga () {
                     
                             <section key={index}>
                                 <HeadTag>
-                                    <title>{manga.attributes.title.en}</title>
+                                    <title>{manga.attributes.title.en} | Manga Sensei</title>
                                 </HeadTag>
 
                                 <MangaInfo 
@@ -122,4 +123,22 @@ export default function SingleManga () {
             
         </main>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+
+    const {id} = params
+
+    const response = await proxy("single", {
+        method: "POST",
+        data: {
+            "mangaID": id
+        }
+    })
+    
+    const mangaData = response.data 
+  
+    return{
+        props: {mangaData},
+    }
 }

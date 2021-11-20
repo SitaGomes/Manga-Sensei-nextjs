@@ -18,20 +18,39 @@ export const Container = styled.div`
             font-size: 1.5rem; 
             font-weight: bold;
 
-            color: var(--red);
+            color: var(--red-500);
 
             padding: 1rem 0;
         }
 
         p {
             width: 100%;
+            font-weight: 500;
+            font-size: 1.3rem;
+            text-align: left;
+
             span{
-                font-weight: 500;
-                font-size: 1.3rem;
+                font-size: 1rem;
+                font-weight: normal;
+                color: var(--grey-200)
             }
 
+            span.ongoing {
+                color: var(--blue-500);
+            }
+
+            span.hiatus {
+                color: var(--yellow-500);
+            }
+
+            span.completed {
+                color: var(--green-500);
+            }
+
+            span.canceled {
+                color: var(--red-500);
+            }
             
-            text-align: left;
         }
     }
 
