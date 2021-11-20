@@ -142,7 +142,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
       
     </>
   )
-}
+}   
 
 
 export const getStaticProps: GetStaticProps = async () => {

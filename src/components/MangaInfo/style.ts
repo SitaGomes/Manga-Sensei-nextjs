@@ -47,7 +47,7 @@ export const Container = styled.div`
                 color: var(--green-500);
             }
 
-            span.canceled {
+            span.cancelled {
                 color: var(--red-500);
             }
             

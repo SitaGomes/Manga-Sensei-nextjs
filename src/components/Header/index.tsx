@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
+
 import { Lup } from 'components/Header/Lup'
 
 import { 
 
     HeaderContainer,
     InputContainer,
-    NavContainer, 
+    NavContainer,
     Logo
 
 } from 'components/Header/style'
@@ -20,7 +21,7 @@ export const Header: React.FC = () => {
 
                 <Link href={"/"}>
                     <Logo>
-                        Manga Sensei
+                        <img src="/logo.svg" alt="Manga Sensei"/>
                     </Logo>
                 </Link>
 
