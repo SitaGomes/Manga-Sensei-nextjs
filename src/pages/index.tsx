@@ -145,7 +145,7 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
 }   
 
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const bannerArt = await proxy.get("cover")
 
@@ -158,8 +158,7 @@ export const getStaticProps: GetStaticProps = async () => {
       bannerArtData: bannerArt.data,
       popularMangaData: popularManga.data,
       popularWebtoonData: popularWebToons.data,
-    },
-    revalidate: 60 * 60 * 12
+    }
   }
 
 }

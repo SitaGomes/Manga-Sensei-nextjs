@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import {useRouter} from "next/router";
 import Header from 'next/head';
 
@@ -88,6 +88,7 @@ export default function SingleManga ({mangaData}: SingleMangaProps) {
     )
 }
 
+/*
 export const getStaticPaths: GetStaticPaths = async () => {
 
     const popularManga: PopularManga = await proxy.get("manga/most-popular")
@@ -106,9 +107,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 
 }
+*/
 
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const {id} = context.params
 

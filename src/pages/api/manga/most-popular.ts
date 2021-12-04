@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import api from "services/api"
 
-
-async function mostPopular(req: NextApiRequest, res: NextApiResponse) {
+export default async function mostPopular(req: NextApiRequest, res: NextApiResponse) {
 
     const {data} = await api.get("/manga", {
         params: {
@@ -16,5 +15,3 @@ async function mostPopular(req: NextApiRequest, res: NextApiResponse) {
     })
 
 }
-
-export default mostPopular
