@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
     margin: auto;
 
-    background-color: var(--grey1);
+    background-color: var(--grey-700);
 `
 
 export const NavContainer = styled.nav`
@@ -26,13 +26,17 @@ export const NavContainer = styled.nav`
 ` 
 
 export const Logo = styled.div`
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--red);
-
-    text-align: center;
-
     cursor: pointer;
+
+    > img {
+        width: 100%;
+
+        @media screen and (min-width: 48em) {
+            width: 250px;
+        }
+    }
+
+    
 
 `
 
@@ -51,7 +55,7 @@ export const InputContainer = styled.div`
     }
 
     > span{
-        background: var(--red);
+        background: var(--red-500);
         border-radius: 0 20px 20px 0;
         padding: 5px 10px;
     }
