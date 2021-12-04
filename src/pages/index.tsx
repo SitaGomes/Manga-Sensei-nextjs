@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //! Next
 import HeadTag from 'next/head';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 //! Axios
 import proxy from "services/proxy"
@@ -100,11 +100,6 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
                     id={manga.id}
                     tittle={manga.attributes.title}
                   />
-                  {/* 
-                    * [0, 1, 2] = values 3 in the array 
-                    * If not in the second position
-                    * Search on the last position
-                  */}
                 </SwiperSlide>
               ))}
           
@@ -130,7 +125,6 @@ export default function Home({bannerArtData, popularMangaData, popularWebtoonDat
                     id={manga.id}
                     tittle={manga.attributes.title}
                   />
-                  {/* [0, 1, 2] = values 3 in the array */}
                 </SwiperSlide>
               ))}
           

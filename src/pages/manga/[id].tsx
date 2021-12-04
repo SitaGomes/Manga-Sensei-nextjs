@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import {useRouter} from "next/router";
+import { GetServerSideProps } from "next";
 import Header from 'next/head';
 
 import proxy from "services/proxy"
@@ -41,14 +40,6 @@ type MangaData = {
     ]
 }
 
-interface PopularManga {
-    data: {
-        response: {
-            data: MangaData[]
-        }
-    }
-}
-
 interface SingleMangaProps {
     mangaData: MangaData[]
 }
@@ -56,10 +47,18 @@ interface SingleMangaProps {
 
 export default function SingleManga ({mangaData}: SingleMangaProps) {
 
-    const router = useRouter()
+    const [loading, setLoading] = useState(true)
 
-    if (router.isFallback) {
-        return <h1>Loading</h1>
+    useEffect(() => {
+
+        if (mangaData.length > 0) {
+            setLoading(false)
+        }
+
+    }, [])
+
+    if (loading) {
+        return <h1>Loading...</h1>
     }
 
     return (
@@ -87,28 +86,6 @@ export default function SingleManga ({mangaData}: SingleMangaProps) {
         </main>
     )
 }
-
-/*
-export const getStaticPaths: GetStaticPaths = async () => {
-
-    const popularManga: PopularManga = await proxy.get("manga/most-popular")
-
-    const paths = popularManga.data.response.data.map(manga => {
-        return {
-            params: {
-                id: manga.id
-            }
-        }
-    })
-
-    return {
-        paths,
-        fallback: true
-    }
-
-}
-*/
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
