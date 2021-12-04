@@ -1,12 +1,12 @@
-import {useRouter} from "next/router"
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+import { GetStaticPaths, GetStaticProps } from "next";
+import {useRouter} from "next/router";
+import Header from 'next/head';
 
 import proxy from "services/proxy"
 
-import HeadTag from 'next/head';
-
 import { MangaInfo } from "components/MangaInfo"
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
 type MangaData = {
 
@@ -41,59 +41,76 @@ type MangaData = {
     ]
 }
 
+interface PopularManga {
+    data: {
+        response: {
+            data: MangaData[]
+        }
+    }
+}
+
 interface SingleMangaProps {
     mangaData: MangaData[]
 }
 
+
 export default function SingleManga ({mangaData}: SingleMangaProps) {
 
-    const [loading, setLoading] = useState(true)
+    const router = useRouter()
 
-    useEffect(() => {
-
-        setLoading(mangaData.length >= 1 
-            ? false //? has data => not loading
-            : true  //? no data => still loading
-        ) 
-
-    }, [mangaData])
-
+    if (router.isFallback) {
+        return <h1>Loading</h1>
+    }
 
     return (
         <main>
-            {loading   
-                ? (<h1>Loading</h1>)
-                : (<>
-                        {mangaData.map((manga, index: number) => (
+            {mangaData.map((manga, index: number) => (
                     
-                            <section key={index}>
-                                <HeadTag>
-                                    <title>{manga.attributes.title.en} | Manga Sensei</title>
-                                </HeadTag>
+                <section key={index}>
+                    <Header>
+                        <title>{manga.attributes.title.en} | Manga Sensei</title>
+                    </Header>
 
-                                <MangaInfo 
-                                    //imageURl={manga.relationships[2]?.attributes?.fileName !== undefined ? manga.relationships[2].attributes.fileName : manga.relationships[manga.relationships.length - 1].attributes.fileName}
-                                    imageURl={manga.relationships.find(child => child.type === "cover_art").attributes.fileName}
-                                    title={manga.attributes.title.en}
-                                    mangaID={manga.id}
-                                    description={manga.attributes.description.en}
-                                    yearOfRelease={manga.attributes.year}
-                                    status={manga.attributes.status}
-                                    lastChapter={manga.attributes.lastChapter}
-                                    lastVolume={manga.attributes.lastVolume}
-                                />
-                            </section>
-                        ))}
-                    </>) 
-            }
-            
+                    <MangaInfo 
+                        //imageURl={manga.relationships[2]?.attributes?.fileName !== undefined ? manga.relationships[2].attributes.fileName : manga.relationships[manga.relationships.length - 1].attributes.fileName}
+                        imageURl={manga.relationships.find(child => child.type === "cover_art").attributes.fileName}
+                        title={manga.attributes.title.en}
+                        mangaID={manga.id}
+                        description={manga.attributes.description.en}
+                        yearOfRelease={manga.attributes.year}
+                        status={manga.attributes.status}
+                        lastChapter={manga.attributes.lastChapter}
+                        lastVolume={manga.attributes.lastVolume}
+                    />
+                </section>
+            ))}
         </main>
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
+export const getStaticPaths: GetStaticPaths = async () => {
 
-    const {id} = params
+    const popularManga: PopularManga = await proxy.get("manga/most-popular")
+
+    const paths = popularManga.data.response.data.map(manga => {
+        return {
+            params: {
+                id: manga.id
+            }
+        }
+    })
+
+    return {
+        paths,
+        fallback: true
+    }
+
+}
+
+
+export const getStaticProps: GetStaticProps = async context => {
+
+    const {id} = context.params
 
     const response = await proxy("single", {
         method: "POST",
