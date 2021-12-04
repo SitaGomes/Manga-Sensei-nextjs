@@ -159,7 +159,7 @@ export const getStaticProps: GetStaticProps = async () => {
       popularMangaData: popularManga.data,
       popularWebtoonData: popularWebToons.data,
     },
-    revalidate: 60 * 60 * 24 // 1 day
+    revalidate: 60 * 60 * 12
   }
 
 }
